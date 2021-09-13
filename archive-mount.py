@@ -1,3 +1,4 @@
+import os
 from gi.repository import Nautilus, GObject, Gio
 import subprocess
 
@@ -10,6 +11,11 @@ SUPPORTED_FORMATS = (
         'application/x-compressed-tar', 'application/x-xz-compressed-tar',
         'application/epub+zip'
 )
+gvfsd_archive_locations = (
+    '/usr/lib/gvfs/gvfsd-archive',
+    '/usr/libexec/gvfsd-archive',
+    '/usr/lib/gvfsd-archive',
+)
 
 class MountArchiveExtension(GObject.GObject, Nautilus.MenuProvider):
     def __init__(self):
@@ -19,7 +25,12 @@ class MountArchiveExtension(GObject.GObject, Nautilus.MenuProvider):
         if file.is_gone():
             return
         file_location = file.get_location().get_path()
-        args = ['/usr/lib/gvfsd-archive', 'file=' + file_location]
+        for gvfsd_archive in gvfsd_archive_locations:
+            if os.path.exists(gvfsd_archive):
+                break
+        else:
+            return
+        args = [gvfsd_archive, 'file=' + file_location]
 
         subprocess.Popen(args)
         

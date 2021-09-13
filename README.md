@@ -15,8 +15,10 @@ wget -qO- https://raw.githubusercontent.com/Lucas-Steinmann/archive-mount-nautil
 
 ## Manual installation
 
-- Ensure the package `python-nautilus` is installed.
-    - (`nautilus-python` for yum-based distros)
+- Ensure the packages providing `python-nautilus` and `gvfsd-archive` is installed.
+    - `nautilus-python` and `gvfs-archive`for yum-based distros
+    - `gvfs` and `python-nautilus` for arch-based distros
+    - `gvfs-backends` and `python-nautilus` for debian-based distros
 - Copy `archive-mount.py` from this repo to `~/.local/share/nautilus-python/extensions`.
 
 ## Uninstallation

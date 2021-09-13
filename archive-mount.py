@@ -17,6 +17,27 @@ gvfsd_archive_locations = (
     '/usr/lib/gvfsd-archive',
 )
 
+# Hacky gettext alternative. (Such that this project stays shippable in one file)
+translations = {
+    'label': {
+        'de': 'Archiv einhängen',
+        'en': 'Mount archive',
+    },
+    'tip': {
+        'de': 'Archiv mit FUSE einhängen.',
+        'en': 'Mount archive with FUSE.',
+    },
+}
+default_lang = 'en_US.UTF-8'
+
+def get_lang():
+    return os.getenv('LANG', default_lang).split('_')[0]
+
+def _(message):
+    userlang = get_lang()
+    return translations[message][userlang]
+
+
 class MountArchiveExtension(GObject.GObject, Nautilus.MenuProvider):
     def __init__(self):
         pass
@@ -50,8 +71,8 @@ class MountArchiveExtension(GObject.GObject, Nautilus.MenuProvider):
             return
 
         item = Nautilus.MenuItem(name='Nautilus::mount_archive',
-                                 label='Archiv einhängen',
-                                 tip='Archiv mit FUSE einhängen.')
+                                 label=_("label"),
+                                 tip=_("tip"))
         item.connect('activate', self.menu_activate_cb, file)
         return item,
 
@@ -59,4 +80,3 @@ class MountArchiveExtension(GObject.GObject, Nautilus.MenuProvider):
     # isn't present
     def get_background_items(self, window, file):
         return None
-

@@ -13,7 +13,6 @@ if type "pacman" >/dev/null 2>&1; then
   fi
 elif type "apt-get" >/dev/null 2>&1; then
   installed=$(apt list --installed python3-nautilus -qq 2>/dev/null)
-  echo $installed
   if [ -z "$installed" ]; then
     set -o xtrace
     sudo apt-get install -y python3-nautilus
@@ -45,7 +44,6 @@ if type "pacman" >/dev/null 2>&1; then
   fi
 elif type "apt-get" >/dev/null 2>&1; then
   installed=$(apt list --installed gvfs-backends -qq 2>/dev/null)
-  echo $installed
   if [ -z "$installed" ]; then
     set -o xtrace
     sudo apt-get install -y gvfs-backends

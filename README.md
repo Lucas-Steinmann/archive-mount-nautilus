@@ -7,11 +7,19 @@ Adds context actions to mount archives using `gvfsd-archive`
 
 ## Automatic installation
 
-Available in [Arch Linux AUR (archive-mount-nautilus-git)](https://aur.archlinux.org/packages/archive-mount-nautilus-git), otherwise:
+### AUR
 
-```
+Available in [Arch Linux AUR (archive-mount-nautilus-git)](https://aur.archlinux.org/packages/archive-mount-nautilus-git)
+
+### Install script for Debian-based (apt), Arch-based (pacman) and RPM-based (dnf) distros
+
+Simply execute this line of command. The script might ask you to enter your sudo password, if it needs to install a missing dependency:
+
+```bash
 wget -qO- https://raw.githubusercontent.com/Lucas-Steinmann/archive-mount-nautilus/main/install.sh | bash
 ```
+
+If you don't want to run a random script asking for sudo, kudos to you. You can also follow the manual installation procedure below.
 
 ## Manual installation
 
@@ -26,3 +34,5 @@ wget -qO- https://raw.githubusercontent.com/Lucas-Steinmann/archive-mount-nautil
 ```
 rm ~/.local/share/nautilus-python/extensions/archive-mount.py
 ```
+
+You can also uninstall the dependencies, if they are not used by other software.
